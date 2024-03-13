@@ -13,11 +13,20 @@ class Owner:
     def __init__(self, name):
         self.name = name
 
-    def pet(self):
+    def pets(self):
         return [pet for pet in Pet.all if pet.owner == self]
     
-    def get_sorted_pets(self, pet):
-        if not isinstance(pet, Pet):
-            raise TypeError("Pet must be an instance of Pet class")
-        pet.owner = self
+    def add_pet(self, pet):
+        if isinstance(pet, Pet):
+            pet.owner = self
+        else:
+            raise Exception("Pet should be instance of Pet Class")
+
+    # def get_sorted_pets(self, pet):
+    #     if not isinstance(pet, Pet):
+    #         raise TypeError("Pet must be an instance of Pet class")
+    #     pet.owner = self
+    def get_sorted_pets(self):
+        return sorted([pet for pet in Pet.all if pet.owner == self], key=lambda pet: pet.name)
         
+
